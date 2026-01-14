@@ -4,15 +4,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 10px 200px;
 }
 
 .header .line {
   display: flex;
   gap: 20px;
   align-items: center;
-  padding-right: 500px;
-}
+  padding: 0 100px;
+}   
 
 .header h3 {
   font-style: normal;
@@ -21,7 +21,6 @@
   line-height: 43px;
   color: #000cf9;
   margin: 0;
-  padding: 10px 100px;
 }
 
 .header h5 {
@@ -30,4 +29,5 @@
   color: #000000;
   margin: 0;
   padding: 10px 25px;
+  cursor: pointer;
 }

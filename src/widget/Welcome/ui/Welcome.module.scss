@@ -1,0 +1,45 @@
+.main {
+  padding: 32px 200px;
+}
+
+.main h1 {
+  font-weight: 700;
+  font-size: 75px;
+  line-height: 75px;
+  max-width: 600px;
+}
+
+.main .description {
+  font-size: 24px;
+  line-height: 29px;
+  padding: 30px 0;
+  max-width: 740px;
+}
+
+.main .blocks {
+  font-size: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px 0;
+  padding-left: 125px;
+  gap: 55px;
+}
+
+.main button {
+  margin: 30px 0;
+  margin-left: 232px;
+  padding: 15px 60px;
+  font-size: 20px;
+  background: #000cf9;
+  border-radius: 8px;
+  color: #ffffff;
+  border: none;
+  font-weight: 600;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.main button:hover {
+  background: #0000e6;
+}
