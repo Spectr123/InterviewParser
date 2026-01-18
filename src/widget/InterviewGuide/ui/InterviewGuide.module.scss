@@ -1,0 +1,67 @@
+.next {
+  flex: 1;
+  padding: 32px;
+  border: 1px solid #000cf9;
+  border-radius: 20px;
+  background: #fff;
+}
+
+.next h3 {
+  font-size: 32px;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  color: #1a1a1a;
+  text-align: center;
+}
+
+.next ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+}
+
+.next li {
+  position: relative;
+  padding: 8px 0 8px 24px;
+  font-size: 16px;
+  color: #1a1a1a;
+}
+
+.next li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  color: #4f46e5;
+  font-weight: bold;
+}
+
+.tip {
+  background: #4f46e5;
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.tip h4 {
+  font-size: 32px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  text-align: center;
+}
+
+.tip p {
+  font-size: 16px;
+  margin: 0;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.microphoneNote {
+  font-size: 16px;
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

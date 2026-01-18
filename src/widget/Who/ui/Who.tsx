@@ -1,7 +1,9 @@
 import styles from "./Who.module.scss";
 import Button from "../../../shared/ui/Button";
+import { useNavigate } from "react-router-dom";
 
 function Who() {
+  const navigate = useNavigate();
   return (
     <div className={styles.content}>
       <h2>Who is it for</h2>
@@ -36,7 +38,12 @@ function Who() {
           <li>Feedback on answers</li>
           <li>Understanding strengths and weaknesses</li>
         </ul>
-        <button className={styles.takeBtn}>Take interview</button>
+        <button
+          className={styles.takeBtn}
+          onClick={() => navigate("/interview")}
+        >
+          Take interview
+        </button>
       </div>
     </div>
   );

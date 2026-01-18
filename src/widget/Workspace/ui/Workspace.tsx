@@ -1,7 +1,9 @@
 import styles from "./Workspace.module.scss";
 import Button from "../../../shared/ui/Button";
+import { useNavigate } from "react-router-dom";
 
 function Workspace() {
+  const navigate = useNavigate();
   return (
     <div className={styles.content}>
       <h2>Workspace</h2>
@@ -21,7 +23,7 @@ function Workspace() {
             <li>Live transcription display</li>
             <li>Comprehensive voice analytics</li>
           </ul>
-          <Button size="small">Start Voice Session→</Button>
+          <Button size="small" onClick={() => navigate("/interview")}>Start Voice Session→</Button>
         </div>
           
         <div className={styles.block}>
