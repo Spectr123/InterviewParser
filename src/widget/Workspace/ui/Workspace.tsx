@@ -6,22 +6,6 @@ function Workspace() {
     <div className={styles.content}>
       <h2>Workspace</h2>
       <div className={styles.blocks}>
-        <div className={styles.block}>
-          <h4>Upload & Transcribe</h4>
-          <p>
-            Transform your audio and video interviews into text with
-            cutting-edge AI transcription. Perfect for processing recorded
-            interviews from any source.
-          </p>
-          <ul>
-            <li>Drag & drop interface</li>
-            <li>Multiple format support (MP3, WAV, M4A, MP4, MOV, AVI)</li>
-            <li>Automatic question extraction</li>
-            <li>Real-time processing progress</li>
-            <li>Instant transcription and analysis</li>
-          </ul>
-          <Button size="small">Upload Files→</Button>
-        </div>
 
         <div className={styles.block}>
           <h4>Voice Interview</h4>
@@ -38,6 +22,23 @@ function Workspace() {
             <li>Comprehensive voice analytics</li>
           </ul>
           <Button size="small">Start Voice Session→</Button>
+        </div>
+          
+        <div className={styles.block}>
+          <h4>Upload & Transcribe</h4>
+          <p>
+            Transform your audio and video interviews into text with
+            cutting-edge AI transcription. Perfect for processing recorded
+            interviews from any source.
+          </p>
+          <ul>
+            <li>Drag & drop interface</li>
+            <li>Multiple format support (MP3, WAV, M4A, MP4, MOV, AVI)</li>
+            <li>Automatic question extraction</li>
+            <li>Real-time processing progress</li>
+            <li>Instant transcription and analysis</li>
+          </ul>
+          <Button size="small">Upload Files→</Button>
         </div>
 
         <div className={styles.block}>

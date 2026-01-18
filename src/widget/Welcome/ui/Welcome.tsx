@@ -1,7 +1,10 @@
 import styles from "./Welcome.module.scss";
 import Button from "../../../shared/ui/Button";
+import { useNavigate } from "react-router-dom";
 
 function Welcome() {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.main}>
       <div className={styles.content}>
@@ -17,7 +20,13 @@ function Welcome() {
           <p>Real-time Recording</p>
           <p>Detailed Analytics</p>
         </div>
-        <Button size="large" className={styles.startButton}>Start Interview</Button>
+        <Button
+          size="large"
+          className={styles.startButton}
+          onClick={() => navigate("/interview")}
+        >
+          Start Interview
+        </Button>
       </div>
       <img src="/img/Welcome.png" alt="Welcome" className={styles.image} />
     </div>
