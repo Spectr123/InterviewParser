@@ -1,0 +1,102 @@
+.hero {
+  display: flex;
+  align-items: center;
+  padding: 60px 0;
+  gap: 60px;
+}
+
+.heroLeft {
+  flex: 1;
+}
+
+.heroLeft h1 {
+  font-size: 75px;
+  max-width: 580px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 20px 0;
+}
+
+.heroLeft p {
+  font-size: 16px;
+  margin-bottom: 40px;
+  line-height: 1.6;
+  max-width: 540px;
+}
+
+.controls {
+  display: flex;
+  gap: 15px;
+}
+
+.scope,
+.update,
+.filter {
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: 1px solid #000CF9;
+  text-align: center;
+  min-width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.scope h4,
+.update h4,
+.filter h4 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.scope p,
+.update p,
+.filter p {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+}
+
+.heroRight {
+  flex: 1;
+  text-align: center;
+}
+
+.heroRight img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 0;
+    gap: 40px;
+  }
+
+  .heroLeft h1 {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroLeft h1 {
+    font-size: 32px;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroLeft h1 {
+    font-size: 28px;
+  }
+}

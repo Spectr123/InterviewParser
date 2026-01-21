@@ -7,7 +7,7 @@ function Header() {
       <Link to="/"><h3>Interview Insights</h3></Link>
       <div className={styles.line}>
         <Link to="/interview"><h5>Voice interview</h5></Link>
-        <h5>Analytics</h5>
+        <Link to="/analytics"><h5>Analytics</h5></Link>
         <h5>Profile</h5>
       </div>
     </div>

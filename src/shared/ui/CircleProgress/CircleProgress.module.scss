@@ -1,0 +1,38 @@
+.circleChart {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+}
+
+.progressRing {
+  transform: rotate(-90deg);
+  width: 200px;
+  height: 200px;
+}
+
+.progressRingBg {
+  fill: none;
+  stroke: #f0f0f0;
+  stroke-width: 12;
+}
+
+.progressRingFill {
+  fill: none;
+  stroke: #22c55e;
+  stroke-width: 12;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.5s ease;
+  transform-origin: center;
+}
+
+.number,
+.percentage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  font-weight: 700;
+  color: #1a1a1a;
+}

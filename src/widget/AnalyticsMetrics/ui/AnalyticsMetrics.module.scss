@@ -1,0 +1,87 @@
+.analytics {
+  padding-bottom: 60px;
+}
+
+.analytics h2 {
+  font-size: 40px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 50px;
+  color: #1a1a1a;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.metric {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e8e8e8;
+}
+
+.metric h3 {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.scoreCard {
+  padding: 20px;
+  border-radius: 12px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.scoreId {
+  font-size: 28px;
+  color: #666;
+  font-weight: 500;
+}
+
+.scoreValue {
+  font-size: 40px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.bestScore {
+  color: #008000;
+}
+
+.worstScore {
+  color: #FF0000;
+}
+
+@media (max-width: 1024px) {
+  .metricsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .metricsGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .analytics h2 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .metric {
+    padding: 20px;
+  }
+}
