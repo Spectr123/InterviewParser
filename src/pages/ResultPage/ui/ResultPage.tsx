@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import Header from "@/widget/Header";
 import InterviewResultMetrics from "@/widget/InterviewResultMetrics";
 import { interviewApi } from "@/shared/api";
-import type { MockInterviewResult } from "@/shared/api/types/interview";
 import styles from "./ResultPage.module.scss";
 
 interface QuestionData {
@@ -20,7 +19,7 @@ interface MetricsData {
   sessionDuration: string;
 }
 
-interface InterviewResultData extends MockInterviewResult {
+interface InterviewResultData {
   interviewId: number;
   totalScore: number;
   candidateLevel: string;
@@ -88,25 +87,47 @@ export default function ResultPage() {
 
     const fetchResult = async () => {
       try {
-        const apiResult = await interviewApi.getMockInterviewResult(
-          parseInt(id),
-        );
+        const apiResult = await interviewApi.getInterview(parseInt(id));
+        const totalQuestions = apiResult.qa.length;
+        const answeredQuestions = apiResult.qa.filter(
+          (q) => q.full_answer && q.full_answer.trim() !== "",
+        ).length;
+        const averageAccuracy =
+          totalQuestions > 0
+            ? Math.round(
+                apiResult.qa.reduce((sum, q) => sum + q.accuracy, 0) /
+                  totalQuestions,
+              )
+            : 0;
 
         const transformedResult: InterviewResultData = {
-          ...apiResult,
-          interviewId: apiResult.mock_interview_id,
-          totalScore: Math.round(apiResult.average_accuracy),
-          candidateLevel: apiResult.evaluation_level,
-          verdict: apiResult.verdict,
-          aiSummary: apiResult.candidate_summary,
+          interviewId: apiResult.id,
+          totalScore: averageAccuracy,
+          candidateLevel:
+            averageAccuracy > 80
+              ? "Strong"
+              : averageAccuracy > 60
+                ? "Middle"
+                : "Junior",
+          verdict: averageAccuracy > 70 ? "Suitable" : "Not Suitable",
+          aiSummary: `The candidate answered ${answeredQuestions} out of ${totalQuestions} questions with an average accuracy of ${averageAccuracy}%.`,
           metrics: {
-            averageAccuracy: apiResult.average_accuracy,
-            answeredQuestions: 0,
-            totalQuestions: 0,
-            confidenceScore: "High",
-            sessionDuration: "0 min",
+            averageAccuracy: averageAccuracy,
+            answeredQuestions: answeredQuestions,
+            totalQuestions: totalQuestions,
+            confidenceScore:
+              averageAccuracy > 80
+                ? "High"
+                : averageAccuracy > 60
+                  ? "Medium"
+                  : "Low",
+            sessionDuration: "15 min",
           },
-          questions: [],
+          questions: apiResult.qa.map((q) => ({
+            id: q.id,
+            title: q.question,
+            score: q.accuracy,
+          })),
         };
 
         setResult(transformedResult);
