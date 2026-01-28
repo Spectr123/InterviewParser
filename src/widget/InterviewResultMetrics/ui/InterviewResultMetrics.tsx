@@ -1,4 +1,8 @@
+import { useState } from "react";
+import { interviewApi } from "@/entities/interview/api/interviewApi";
 import type { InterviewResultData } from "@/entities/interview";
+import { Modal } from "@/shared/ui/Modal";
+import Button from "@/shared/ui/Button";
 import InterviewResultActions from "./InterviewResultActions";
 import InterviewResultKeyMetrics from "./InterviewResultKeyMetrics";
 import InterviewResultQuestions from "./InterviewResultQuestions";
@@ -12,11 +16,47 @@ interface InterviewResultMetricsProps {
 export default function InterviewResultMetrics({
   data,
 }: InterviewResultMetricsProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleDelete = async () => {
+    try {
+      await interviewApi.deleteInterview(data.interviewId);
+      window.location.href = "/";
+    } catch (error) {
+      console.error("Failed to delete interview:", error);
+    }
+  };
   return (
     <div>
       <div className={styles.pageTitle}>
         <h1>Interview Results</h1>
+        <Button
+          onClick={() => setIsModalOpen(true)}
+          className={styles.deleteButton}
+        >
+          Delete this interview
+        </Button>
       </div>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <div className={styles.modalContent}>
+          <p>Are you sure you want to delete this interview?</p>
+          <div className={styles.modalActions}>
+            <Button
+              onClick={() => setIsModalOpen(false)}
+              className={styles.modalButtonSecondary}
+            >
+              No
+            </Button>
+            <Button
+              onClick={handleDelete}
+              className={styles.modalButtonPrimary}
+            >
+              Yes
+            </Button>
+          </div>
+        </div>
+      </Modal>
 
       <div className={styles.container}>
         <InterviewResultSummary
