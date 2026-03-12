@@ -1,73 +1,50 @@
-# React + TypeScript + Vite
+# Interview Parser UI (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React-based client for the Interview Parser AI system. This repository handles the interactive interview flow, audio stream processing, and technical evaluation dashboards.
 
-Currently, two official plugins are available:
+## Architecture
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The application is built on **React 18** and **TypeScript**, compiled for both web and desktop environments.
 
-## React Compiler
+## Core Technical Implementations
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 1. Audio Processing & VAD
+The client manages the full recording lifecycle without manual stop triggers by implementing a **Voice Activity Detection (VAD)** algorithm:
+* [cite_start]**Analysis**: Utilizes the `Web Audio API` and `AnalyserNode` to monitor real-time frequency data [cite: 593-594].
+* [cite_start]**Logic**: Calculates root-mean-square (RMS) volume and triggers `mediaRecorder.stop()` after a 5000ms period of silence [cite: 584, 608-609].
+* [cite_start]**Visualization**: Renders a live frequency spectrum via HTML5 Canvas during active recording[cite: 329].
 
-## Expanding the ESLint configuration
+### 2. Binary Data Management
+To ensure compatibility with the backend transcription engine (OpenAI Whisper):
+* [cite_start]**MIME Detection**: Implements a helper to detect MIME types by inspecting **magic bytes** (binary signatures) rather than file extensions [cite: 478-497].
+* [cite_start]**Transmission**: Chunks recorded audio into Blobs, converts them to Base64, and transmits them via the `AnswerMockInterviewQA` method [cite: 631, 643-651, 1145].
+* [cite_start]**Caching**: Supports exponential backoff for audio object retrieval to handle transient API errors [cite: 443-447, 1228-1243].
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 3. Interview State Machine
+The interview flow is managed through a centralized state machine:
+* [cite_start]**Session Lifecycle**: Tracks states from `pending` (question generation) to `running` and `finished` (analysis complete) [cite: 353-356].
+* [cite_start]**Polling Logic**: Executes a 5-second interval status check to synchronize the UI with the backend's asynchronous AI processing [cite: 797-798, 808-811].
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+* **Framework**: React 18
+* **Language**: TypeScript (Strict)
+* **API Communication**: Wails Go-bindings / Fetch API
+* **Build Tool**: Vite / Wails CLI
+* **Audio**: Web Audio API / MediaRecorder API
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Project Structure
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+* [cite_start]`src/components`: UI modules including VoiceInterview, Analytics, and Profile [cite: 155-159].
+* [cite_start]`src/services`: Integration layer for backend API endpoints and Wails methods [cite: 1120-1129].
+* [cite_start]`src/utils`: Binary processing, MIME sniffing, and retry logic[cite: 478, 1229].
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Deployment & Build
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. Install dependencies:
+   ```bash
+   cd "YOUR PATH"
+   npm install
+   npm run dev
+
+   Author: Spectr123
