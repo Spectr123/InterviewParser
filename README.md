@@ -1,4 +1,4 @@
-# Interview Parser UI (Frontend)
+# Interview Parser AI
 
 React-based client for the Interview Parser AI system. This repository handles the interactive interview flow, audio stream processing, and technical evaluation dashboards.
 
@@ -41,7 +41,7 @@ The interview flow is managed through a centralized state machine:
 
 ## Deployment & Build
 
-1. Install dependencies:
+1. To start:
    ```bash
    cd "YOUR PATH"
    npm install
